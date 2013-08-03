@@ -1,6 +1,7 @@
 require_relative 'atributo'
 require_relative 'ejemplo'
 require_relative 'hipotesis'
+require 'benchmark'
 
 class ListarDespuesEliminar
   attr_accessor :atributos, :ejemplos
@@ -53,4 +54,8 @@ ej3 = Ejemplo.new(["lluvioso","fria","alta","fuerte","templada","cambia"], false
 ej4 = Ejemplo.new(["soleado","templada","alta","fuerte","fria","cambia"], true)
 
 lde = ListarDespuesEliminar.new([cielo,temp_aire,humedad,viento,temp_agua,pronostico], [ej1,ej2,ej3,ej4])
-puts lde.run.inspect
+res = nil
+Benchmark.bm do |b|
+  b.report("Eliminacion del candidato:") { res = lde.run }
+end
+puts res.inspect
