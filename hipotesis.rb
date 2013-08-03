@@ -14,6 +14,29 @@ class Hipotesis
     return false
   end
 
+  def mas_general(hipotesis)
+    if generalidad >= hipotesis.generalidad
+      return true
+    end
+    return false
+  end
+
+  def generalidad
+    generalidad = 0
+    @valores.each do |valor|
+      generalidad += 2 if valor == '?'
+      generalidad += 1 if valor != '0' and valor != '?'
+    end
+    generalidad
+  end
+
+  def mas_especifico(hipotesis)
+    if generalidad <= hipotesis.generalidad
+      return true
+    end
+    return false
+  end
+
   protected
 
   def acepta(ejemplo)

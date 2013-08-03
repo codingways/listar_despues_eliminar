@@ -37,6 +37,11 @@ class ListarDespuesEliminar
       espacio_versiones.select! { |hipotesis| hipotesis.consistente(ejemplo) }
     end
 
+    max_generalidad = espacio_versiones.map { |hipotesis| hipotesis.generalidad }.max
+    max_especificidad = espacio_versiones.map { |hipotesis| hipotesis.generalidad }.min
+
+    espacio_versiones.select! { |hipotesis| hipotesis.generalidad == max_generalidad or hipotesis.generalidad == max_especificidad}
+
     espacio_versiones.map {|hipotesis| hipotesis.valores} 
   end
 end
