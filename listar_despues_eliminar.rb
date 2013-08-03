@@ -40,9 +40,7 @@ class ListarDespuesEliminar
     max_generalidad = espacio_versiones.map { |hipotesis| hipotesis.generalidad }.max
     max_especificidad = espacio_versiones.map { |hipotesis| hipotesis.generalidad }.min
 
-    espacio_versiones.select! { |hipotesis| hipotesis.generalidad == max_generalidad or hipotesis.generalidad == max_especificidad}
-
-    espacio_versiones.map {|hipotesis| hipotesis.valores} 
+    [espacio_versiones.select { |hipotesis| hipotesis.generalidad == max_especificidad }, espacio_versiones.select { |hipotesis| hipotesis.generalidad == max_generalidad }]
   end
 end
 
@@ -63,4 +61,4 @@ res = nil
 Benchmark.bm do |b|
   b.report("Eliminacion del candidato:") { res = lde.run }
 end
-puts res.inspect
+puts "Especificas\n#{res[0]}\n\nGenerales#{res[1]}"
