@@ -14,7 +14,7 @@ class ListarDespuesEliminar
     espacio_versiones = []
 
     @atributos.each do |atributo|
-      atributo.instancias.push "?", "0"
+      atributo.instancias.push "?"
     end
     
     # Construir espacio de versiones (Todas las combinaciones entre instancias de atributos)
